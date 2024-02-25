@@ -1,60 +1,70 @@
-use std::fmt::{Formatter};
+use std::fmt::Formatter;
 
 // These `Cat` definitions would normally be inside your project's code,
 // not test code, but we create them here for the show case.
 #[derive(Debug, Default)]
 pub struct Cat {
     pub hungry: bool,
-    pub vomit: bool,
+    pub vomiting: bool,
     pub starving: bool,
-    pub alive : bool,
+    pub alive: bool,
 }
-
-
 
 impl Cat {
     pub fn feed(&mut self) {
-        if self.alive{
-        if self.hungry {
-            self.starving = false;//finally!
+        if !self.alive {
+            return;
+        }
+
+        if self.starving {
+            self.starving = false;
+            self.hungry = true;
+            self.vomiting = false;
+        } else if self.hungry {
+            self.starving = false; //finally!
             self.hungry = false;
-            self.vomit = false;
+            self.vomiting = false;
+        } else if self.vomiting {
+            println!("Kill");
+            self.alive = false; //dead
+            self.hungry = false; //whatever
+            self.vomiting = false; //whatever
+            self.starving = false;
         } else {
             self.hungry = false;
             self.starving = false;
-            self.vomit = true;
+            self.vomiting = true;
         }
-    }
     }
 
     pub fn starve(&mut self) {
+        if !self.alive {
+            return;
+        }
         if self.starving {
             self.alive = false;
+            self.starving = false;
+            self.hungry = false;
+            self.vomiting = false;
         }
 
         if self.alive {
-
-        if self.hungry {
-            self.starved=true;
-        } else {
-            self.hungry = true;
-            self.vomit = false;
+            if self.hungry {
+                self.starving = true;
+            } else {
+                self.hungry = true;
+                self.vomiting = false;
+                self.starving = false;
+            }
         }
-    }
     }
 }
 
 impl std::fmt::Display for Cat {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), std::fmt::Error> {
-
-        let status = match self.starved{
-            true => "dead",
-            _ => ""
-        };
-
-        let verb = match self.starved{
-            true => "was",
-            _ => "is"
+        let status = match self.alive {
+            true => "alive",
+            _ => "dead",
         };
 
         let hungry = match self.hungry {
@@ -62,11 +72,15 @@ impl std::fmt::Display for Cat {
             _ => "not hungry",
         };
 
-        let vomit = match self.vomit {
-            true => "and vomits",
-            _ => "and does not vomit",
+        let health = {
+            if self.vomiting {
+                "vomits"
+            } else if self.starving {
+                "starves"
+            } else {
+                "feels ok"
+            }
         };
-
-        write!(f, "A {status} cat who {verb} {hungry} {vomit}.")
+        write!(f, "A cat ({status}) who is {hungry} and {health}.")
     }
 }
