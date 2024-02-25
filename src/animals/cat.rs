@@ -14,25 +14,33 @@ pub struct Cat {
 
 impl Cat {
     pub fn feed(&mut self) {
-        if self.starved
+        if self.alive{
         if self.hungry {
-            self.starved = false;//finally!
+            self.starving = false;//finally!
             self.hungry = false;
             self.vomit = false;
         } else {
             self.hungry = false;
-            self.starved = false;
+            self.starving = false;
             self.vomit = true;
         }
     }
+    }
 
     pub fn starve(&mut self) {
+        if self.starving {
+            self.alive = false;
+        }
+
+        if self.alive {
+
         if self.hungry {
             self.starved=true;
         } else {
             self.hungry = true;
             self.vomit = false;
         }
+    }
     }
 }
 
