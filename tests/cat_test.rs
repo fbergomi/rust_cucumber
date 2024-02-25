@@ -31,37 +31,37 @@ fn given_cat(world: &mut AnimalWorld, state: String) {
             world.cat.hungry = false;
             world.cat.vomiting = false;
             world.cat.starving = false;
-        },
+        }
         "dead" => {
             world.cat.alive = false;
             world.cat.hungry = false;
             world.cat.vomiting = false;
             world.cat.starving = false;
-        },
+        }
         "hungry" => {
             world.cat.alive = true;
             world.cat.hungry = true;
             world.cat.vomiting = false;
             world.cat.starving = false;
-        },
+        }
         "satiated" => {
             world.cat.alive = true;
             world.cat.hungry = false;
             world.cat.vomiting = false;
             world.cat.starving = false;
-        },
+        }
         "vomiting" => {
             world.cat.alive = true;
             world.cat.hungry = false;
             world.cat.vomiting = true;
             world.cat.starving = false;
-        },
+        }
         "starving" => {
             world.cat.alive = true;
             world.cat.hungry = true;
             world.cat.vomiting = false;
             world.cat.starving = true;
-        },
+        }
         _ => unreachable!(),
     }
 
@@ -73,29 +73,29 @@ fn given_cat(world: &mut AnimalWorld, state: String) {
 // Don't forget to additionally `use cucumber::when;`.
 #[when("I feed the cat")]
 fn feed_cat(world: &mut AnimalWorld) {
-    let temp_cat = &world.cat;
+    /*     let temp_cat = &world.cat;
     println!("Feeding cat : ");
-    println!("\t{temp_cat}");
+    println!("\t{temp_cat}"); */
 
     world.cat.feed();
 
-    let temp_cat = &world.cat;
+    /*     let temp_cat = &world.cat;
     println!("\tBecomes : ");
-    println!("\t{temp_cat}");
+    println!("\t{temp_cat}"); */
 }
 
 // Don't forget to additionally `use cucumber::when;`.
 #[when("I starve the cat")]
 fn starve_cat(world: &mut AnimalWorld) {
-    let temp_cat = &world.cat;
+    /*     let temp_cat = &world.cat;
     println!("Starving cat : ");
-    println!("\t{temp_cat}");
+    println!("\t{temp_cat}"); */
 
     world.cat.starve();
 
-    let temp_cat = &world.cat;
+    /*     let temp_cat = &world.cat;
     println!("\tBecomes : ");
-    println!("\t{temp_cat}");
+    println!("\t{temp_cat}"); */
 }
 
 fn negate(predicate: bool, negation: bool) -> bool {
@@ -113,9 +113,11 @@ fn then_cat(world: &mut AnimalWorld, optional: String, state: String) {
         _ => false,
     };
 
+    /*
     let temp_cat = &world.cat;
     println!("Testing predicate : \"The cat is {optional} {state}.\" on cat : ");
     println!("{temp_cat}");
+    */
 
     match state.as_str() {
         "alive" => assert!(world.cat.alive == negate(true, negation)),
