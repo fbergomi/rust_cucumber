@@ -45,6 +45,7 @@ impl Cat {
             self.starving = false;
             self.hungry = false;
             self.vomiting = false;
+            return;
         }
 
         if self.alive {
