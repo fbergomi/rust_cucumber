@@ -25,7 +25,6 @@ impl Cat {
             self.hungry = false;
             self.vomiting = false;
         } else if self.vomiting {
-            println!("Kill");
             self.alive = false; //dead
             self.hungry = false; //whatever
             self.vomiting = false; //whatever
