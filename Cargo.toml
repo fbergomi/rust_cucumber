@@ -1,0 +1,16 @@
+[package]
+name = "cucumber_test"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[dev-dependencies]
+cucumber = "0.20.2"
+futures = "0.3.30"
+
+[[test]]
+name = "cat_test" # this should be the same as the filename of your test target
+harness = false   # allows Cucumber to print output instead of libtest
