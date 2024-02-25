@@ -1,6 +1,6 @@
 pub mod animals;
 
-use animals::cat::Cat;
+//use animals::cat::Cat;
 
 fn main() {
     /*     let alive_cat = Cat {
