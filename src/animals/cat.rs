@@ -1,13 +1,25 @@
 use std::fmt::Formatter;
 
-// These `Cat` definitions would normally be inside your project's code,
-// not test code, but we create them here for the show case.
-#[derive(Debug, Default)]
+/// A toy cat whose state changes when it is fed or starved.
+/// This is the code under test of the Cucumber scenarios in `tests/`.
+#[derive(Debug)]
 pub struct Cat {
     pub hungry: bool,
     pub vomiting: bool,
     pub starving: bool,
     pub alive: bool,
+}
+
+/// By default a cat is alive and satiated.
+impl Default for Cat {
+    fn default() -> Self {
+        Self {
+            alive: true,
+            hungry: false,
+            vomiting: false,
+            starving: false,
+        }
+    }
 }
 
 impl Cat {
