@@ -38,3 +38,21 @@ Feature: Animal feature
     When I starve the cat
     Then the cat is dead
     Then the cat is not alive
+
+  Scenario: feeding a dead cat does not bring it back to life
+    Given a dead cat
+    When I feed the cat
+    Then the cat is dead
+    Then the cat is not alive
+    Then the cat is not hungry
+    Then the cat is not vomiting
+    Then the cat is not starving
+
+  Scenario: starving a dead cat changes nothing
+    Given a dead cat
+    When I starve the cat
+    Then the cat is dead
+    Then the cat is not alive
+    Then the cat is not hungry
+    Then the cat is not vomiting
+    Then the cat is not starving
